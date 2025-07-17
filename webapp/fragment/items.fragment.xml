@@ -1,0 +1,104 @@
+<core:FragmentDefinition xmlns:tnt="sap.tnt" xmlns:cards="sap.f.cards" xmlns:form="sap.ui.layout.form" xmlns:m="sap.m" xmlns:core="sap.ui.core"     xmlns="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:u="sap.ui.unified"
+    xmlns:c="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form" 
+    xmlns:smarttable="sap.ui.comp.smarttable"
+>   
+ <smarttable:SmartTable 
+                id="idSDInvoiceSmartTable"
+                entitySet="SDInvoice"
+                tableBindingPath="SDInvoiceModel>/SDInvoice"
+                tableType="ResponsiveTable"
+                useVariantManagement="true"
+                useTablePersonalisation="true"
+                header="Records"
+                showRowCount="true"
+                enableAutoBinding="true"
+                enableExport="false"
+                demandPopin="true"
+                requestAtLeastFields="vbeln,fkdat,kunag,name1,vkont,total"
+            >
+            <Table id="tblSDInvoicePreview"
+                ariaLabelledBy="title"
+                rows="{SDInvoiceModel>/SDInvoice}" 
+                enableSelectAll="false"
+                selectionMode="None" 
+                selectionBehavior="RowSelector"           
+                enableColumnFreeze="true">                
+                <columns>
+                    <!-- <Column
+                        width="11rem">
+                        <m:Label text="ID" textAlign="Begin" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center" text="{SDInvoiceModel>ID}"/>
+                        </template>
+                    </Column>    -->
+                   <!-- <Column
+                        width="11rem">
+                        <m:Label text="TotaledProperties" textAlign="Begin" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center"  text="{SDInvoiceModel>TotaledProperties}"/>
+                        </template>
+                    </Column>   -->
+                    <Column
+                        width="13rem" hAlign="Center">
+                        <m:Label text="Invoice Number" textAlign="Center" width="100%"/>
+                        <template>
+                             <m:Link text="{SDInvoiceModel>vbeln}" press="onPressInvoice" textAlign="Center"/>                            
+                        </template>
+                    </Column>  
+                    <Column
+                        width="13rem" hAlign="Center">
+                        <m:Label text="Invoice Date" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center" text="{SDInvoiceModel>fkdat}"/>
+                        </template>
+                    </Column>  
+                    <!-- <Column
+                        width="11rem">
+                        <m:Label text="fkdat_T" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center" text="{SDInvoiceModel>fkdat_T}"/>
+                        </template>
+                    </Column>   -->
+                    <Column
+                        width="13rem" hAlign="Center">
+                        <m:Label text="Bill To Party" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center" text="{SDInvoiceModel>kunag}" />
+                        </template>
+                    </Column>   
+                     <Column
+                       width="13rem" hAlign="Center">
+                        <m:Label text="Bill to Party Name" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center" text="{SDInvoiceModel>name1}"/>
+                        </template>
+                    </Column>   
+                    <Column
+                       width="13rem" hAlign="Center">
+                        <m:Label text="Contract Account" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center" text="{SDInvoiceModel>vkont}"/>
+                        </template>
+                    </Column>  
+                    <Column
+                       width="13rem" hAlign="Center">
+                        <m:Label text="Total Invoice Number" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center" text="{SDInvoiceModel>total}"/>
+                        </template>
+                    </Column>
+                    <!-- <Column
+                        width="11rem">
+                        <m:Label text="total_F" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center" text="{SDInvoiceModel>total_F}"/>
+                        </template>
+                    </Column>    -->
+                </columns>
+        </Table> 
+        </smarttable:SmartTable>
+</core:FragmentDefinition>

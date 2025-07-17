@@ -19,6 +19,10 @@ server:
           - path: /sap
             url: http://sapsdvapp.aws.londonhydro.cloud:8000
             client: '200'
+          - url: https://sapwdv.aws.londonhydro.cloud:44301/
+            client: '200'
+            authenticationType: basic
+            path: /sap/opu/odata/SAP/ZBI_PRINT_PREVIEW_SRV/
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
@@ -38,6 +42,10 @@ server:
           - urlPath: /sap/opu/odata/sap/ZC_CN_SUN_INV_APL_CON_CDS
             metadataPath: ./webapp/localService/mainService/metadata.xml
             mockdataPath: ./webapp/localService/mainService/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/SAP/ZBI_PRINT_PREVIEW_SRV
+            metadataPath: ./webapp/localService/ZBI_PRINT_PREVIEW_SRV/metadata.xml
+            mockdataPath: ./webapp/localService/ZBI_PRINT_PREVIEW_SRV/data
             generateMockData: true
         annotations:
           - localPath: ./webapp/localService/mainService/ZC_CN_SUN_INV_APL_CON_CDS_VAN.xml
