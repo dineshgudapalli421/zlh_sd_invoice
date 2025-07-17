@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZC_CN_SUN_INV_APL_CON_CDS" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="ZC_CN_SUN_INV_APL_CONType" sap:label="Sundry Invoice Application Part-1" sap:semantics="aggregate" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" sap:filterable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="TotaledProperties" Type="Edm.String" sap:aggregation-role="totaled-properties-list" sap:is-annotation="true" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="vbeln" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:label="Bill Number" sap:quickinfo="Billing Document" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="fkdat" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:label="Bill Date" sap:quickinfo="Billing Date" sap:creatable="false" sap:updatable="false" sap:semantics="yearmonthday"/>
+                <Property Name="fkdat_T" Type="Edm.String" MaxLength="10" sap:label="Bill Date (Description)" sap:quickinfo="Billing Date" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="kunag" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:label="Bill To Party" sap:quickinfo="Sold-to Party" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="name1" Type="Edm.String" MaxLength="35" sap:aggregation-role="dimension" sap:label="Bill To Party Name" sap:quickinfo="Name 1" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="vkont" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:label="Contract Account Number" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="total" Type="Edm.Decimal" Precision="42" Scale="2" sap:aggregation-role="measure" sap:filterable="false" sap:text="total_F" sap:updatable="false" sap:label="Bill Amount" sap:creatable="false"/>
+                <Property Name="total_F" Type="Edm.String" MaxLength="60" sap:label="Bill Amount (Formatted)" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ODataQueryAdditionalMetadata" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ODataQueryMetadata"/>
+                </Key>
+                <Property Name="ODataQueryMetadata" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ODataQueryMetadataValue_Current" Type="Edm.String" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ODataQueryMetadataValueAtDefine" Type="Edm.String" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZC_CN_SUN_INV_APL_CON_CDS_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZC_CN_SUN_INV_APL_CON" EntityType="ZC_CN_SUN_INV_APL_CON_CDS.ZC_CN_SUN_INV_APL_CONType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="AdditionalMetadata" EntityType="ZC_CN_SUN_INV_APL_CON_CDS.ODataQueryAdditionalMetadata" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <atom:link rel="self" href="http://sapsdvapp.aws.londonhydro.cloud:8000/sap/opu/odata/sap/ZC_CN_SUN_INV_APL_CON_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://sapsdvapp.aws.londonhydro.cloud:8000/sap/opu/odata/sap/ZC_CN_SUN_INV_APL_CON_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
