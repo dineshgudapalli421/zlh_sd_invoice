@@ -28,22 +28,34 @@ sap.ui.define([
         },
         _onRouteMatch: function (oEvent) {
             debugger;
-           var oSDInvoiceModel = oController.getView().getModel("SDInvoiceModel");
+            var oComponentData = UIComponent.getComponentData();
+            var contractAccount = '';
+            if (oComponentData && oComponentData.startupParameters) {
+                var oParams = oComponentData.startupParameters;
+                contractAccount = oParams.ContractAccount[0];
+                if (contractAccount) {
+                    oController.getView().byId("idCA").setValue(contractAccount);
+                }
+            }
+            var oSDInvoiceModel = oController.getView().getModel("SDInvoiceModel");
             var oModel = oController.getOwnerComponent().getModel();
-            var aFilter = [];            
+            var aFilter = [];
+            if (contractAccount) {
+                aFilter.push(new Filter("vkont", FilterOperator.EQ, contractAccount));
+            }
             oModel.read("/ZC_CN_SUN_INV_APL_CON", {
                 filters: aFilter,
-                success: function (response) {                   
+                success: function (response) {
                     if (response.results.length > 0) {
-                        oSDInvoiceModel.setProperty("/SDInvoice", response.results);                        
+                        oSDInvoiceModel.setProperty("/SDInvoice", response.results);
                     }
                     else if (response.results.length === 0) {
-                        oSDInvoiceModel.setProperty("/SDInvoice", {});                       
+                        oSDInvoiceModel.setProperty("/SDInvoice", {});
                     }
                 },
                 error: (oError) => {
-                     oSDInvoiceModel.setProperty("/SDInvoice", {});  
-                     MessageBox.error("Error loading records : " + oError.message);
+                    oSDInvoiceModel.setProperty("/SDInvoice", {});
+                    MessageBox.error("Error loading records : " + oError.message);
                 }
             });
         },
@@ -55,13 +67,7 @@ sap.ui.define([
             var oJsonModel = new sap.ui.model.json.JSONModel();
             var oSDInvoiceModel = oController.getView().getModel("SDInvoiceModel");
             var aFilter = [];
-            const contractAccount = this.getView().byId("idCA").getValue();
-            // if (contractAccount === "") {
-            //     oJsonModel.setData({});
-            //     oSDInvoiceModel.setProperty("/SDInvoice", oJsonModel);
-            //    // oController.getView().byId("tblSDInvoicePreview").setModel(oJsonModel, "SDInvoiceModel");
-            //     return MessageBox.error("Contract Account is mandatory...");
-            // }
+            const contractAccount = this.getView().byId("idCA").getValue();           
 
             if (contractAccount !== "") {
                 aFilter.push(new Filter("vkont", FilterOperator.EQ, contractAccount));
@@ -78,15 +84,10 @@ sap.ui.define([
                 success: function (response) {
                     oBusyDialog.close();
                     if (response.results.length > 0) {
-                        oSDInvoiceModel.setProperty("/SDInvoice", response.results);
-                        // oJsonModel.setData(response.results);
-                        // oView.byId("tblSDInvoicePreview").setModel(oJsonModel, "SDInvoiceModel");
-                        // oTable.clearSelection(true);
+                        oSDInvoiceModel.setProperty("/SDInvoice", response.results);                       
                     }
                     else if (response.results.length === 0) {
-                        oSDInvoiceModel.setProperty("/SDInvoice", {});
-                        // oJsonModel.setData({});
-                        // oView.byId("tblSDInvoicePreview").setModel(oJsonModel);
+                        oSDInvoiceModel.setProperty("/SDInvoice", {});                        
                         return MessageBox.error("There are no records with selection.")
                     }
                 },
@@ -101,7 +102,6 @@ sap.ui.define([
                 }
             });
 
-            //this.switchState("Navigation");
 
         },
         onPressInvoice: function (oEvent) {
@@ -134,7 +134,7 @@ sap.ui.define([
                         oPDFViewer.open();
                     }.bind(oController),
                     error: function (oError) {
-                        MessageBox.error("Error loading PDF: ",  oError.message);
+                        MessageBox.error("Error loading PDF: ", oError.message);
                     }
                 })
             }
