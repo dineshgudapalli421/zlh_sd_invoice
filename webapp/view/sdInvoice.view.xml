@@ -41,7 +41,29 @@
                                         >
                                         </Input>
                                     </fb:control>
-                                </fb:FilterGroupItem>                                                                                              
+                                </fb:FilterGroupItem> 
+                                <fb:FilterGroupItem 
+										name="periodFrom" 
+										label="Billing Date From" 
+										groupName="Group1" 
+										visibleInFilterBar="true" mandatory="true">
+											<fb:control>
+                                             <DatePicker
+                                                id="idDTP1" width="100%"
+                                                placeholder="Enter Date"/>                                       
+											</fb:control>
+								</fb:FilterGroupItem>
+										<fb:FilterGroupItem
+											name="periodTo"
+											label="Billing Date To"
+											groupName="Group1"
+											visibleInFilterBar="true" mandatory="true">
+											<fb:control>
+												<DatePicker
+                                                id="idDTP2" width="100%"
+                                                placeholder="Enter Date"/> 
+											</fb:control>
+										</fb:FilterGroupItem>                                                                                             
                             </fb:filterGroupItems>                        
             </fb:FilterBar>
         </f:content>        

@@ -9,8 +9,9 @@ sap.ui.define([
     "sap/m/PDFViewer",
     "sap/m/Dialog",
     "sap/m/Button",
-    "sap/base/security/URLWhitelist"
-], (Controller, ODataModel, Filter, FilterOperator, JSONModel, MessageBox, Fragment, PDFViewer, Dialog, Button, URLWhitelist) => {
+    "sap/base/security/URLWhitelist",
+    "sap/ui/core/format/DateFormat"
+], (Controller, ODataModel, Filter, FilterOperator, JSONModel, MessageBox, Fragment, PDFViewer, Dialog, Button, URLWhitelist, DateFormat) => {
     "use strict";
     var oRouter, oController, oPDFModel, UIComponent, oCorrespTypeModel;
     return Controller.extend("com.sap.lh.mr.zlhsdinvoice.controller.sdInvoice", {
@@ -61,6 +62,16 @@ sap.ui.define([
             });
         },
 
+        getDateFormat: function (strDate) {
+
+            var oDateFormat = DateFormat.getInstance({
+                UTC: false,
+                pattern: "yyyyMMdd"
+            });
+            var formatDate = oDateFormat.format(new Date(strDate));
+            return formatDate.toString();
+        },
+
         onSearch: function () {
             debugger;
             const oView = this.getView();
@@ -69,11 +80,17 @@ sap.ui.define([
             var oSDInvoiceModel = oController.getView().getModel("SDInvoiceModel");
             var aFilter = [];
             const contractAccount = this.getView().byId("idCA").getValue();
+            const fromDate = this.getView().byId("idDTP1").getValue();
+            const toDate = this.getView().byId("idDTP2").getValue();
 
             if (contractAccount !== "") {
                 aFilter.push(new Filter("vkont", FilterOperator.EQ, contractAccount));
             }
-
+            if (fromDate !== "" && toDate !== "") {
+                let billingfrom = this.getDateFormat(this.byId("idDTP1").getDateValue());
+                let billingTo = this.getDateFormat(this.byId("idDTP2").getDateValue());
+                aFilter.push(new Filter("fkdat", FilterOperator.BT, billingfrom, billingTo));
+            }
             var oModel = oController.getOwnerComponent().getModel();
             var oBusyDialog = new sap.m.BusyDialog({
                 title: "Loading Data",
