@@ -128,40 +128,19 @@ sap.ui.define([
             let oInvoiceNo = oSourceValue.getText();
             if (oInvoiceNo) {
                 var oSource = "/sap/opu/odata/SAP/ZBI_PRINT_PREVIEW_SRV/Print_previewSet('" + oInvoiceNo + "')/$value";
-                this.getView().getModel("SDInvoiceModel").setProperty("/oInvoicePDF", oSource);
-                if (!this.oPdfDialog) {
-                    this.oPdfDialog = sap.ui.xmlfragment("com.sap.lh.mr.zlhsdinvoice.fragment.invoicePDF", this);
-                    this.getView().addDependent(this.oPdfDialog);
-                }
-                this.oPdfDialog.open();
-
-                // var sEntityPath = "/Print_previewSet('" + oInvoiceNo + "')/$value";
-                // oPDFModel.read(sEntityPath, {
-                //     success: function (oData, oResponse) {
-                //         debugger;
-                //         var sContentType = oResponse.headers["content-type"] || "application/pdf";
-                //         var sBase64Data = oData;
-                //         var sFileName = oResponse.headers["content-disposition"]?.match(/filename="(.+)"/)?.[1] || "document.pdf";
-                //         var decodedPdfContent = atob(sBase64Data);
-                //         var byteArray = new Uint8Array(decodedPdfContent.length);
-                //         for (var i = 0; i < decodedPdfContent.length; i++) {
-                //             byteArray[i] = decodedPdfContent.charCodeAt(i);
-                //         }
-                //         var oBlob = new Blob([byteArray.buffer], { type: sContentType });
-                //         var sPdfUrl = URL.createObjectURL(oBlob);
-                //         URLWhitelist.add("blob");
-
-                //         var oPDFViewer = new PDFViewer({
-                //             source: sPdfUrl,
-                //             title: sFileName,
-                //             height: "600px"
-                //         })
-                //         oPDFViewer.open();
-                //     }.bind(oController),
-                //     error: function (oError) {
-                //         MessageBox.error("Error loading PDF: ", oError.message);
-                //     }
-                // })
+                // this.getView().getModel("SDInvoiceModel").setProperty("/oInvoicePDF", oSource);
+                // if (!this.oPdfDialog) {
+                //     this.oPdfDialog = sap.ui.xmlfragment("com.sap.lh.mr.zlhsdinvoice.fragment.invoicePDF", this);
+                //     this.getView().addDependent(this.oPdfDialog);
+                // }
+                // this.oPdfDialog.open();
+                var oPdfViewer = new PDFViewer({
+                    title: "Sundry Invoice",
+                    height: "600px"
+                });
+                oPdfViewer.setSource(oSource);
+                oPdfViewer.open(); 
+                
             }
         },
         onCloseDialogPDF: function () {
