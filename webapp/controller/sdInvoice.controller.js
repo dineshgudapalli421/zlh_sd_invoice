@@ -26,6 +26,9 @@ sap.ui.define([
                 SDInvoice: []
             });
             oController.getView().setModel(oSDInvoiceModel, "SDInvoiceModel");
+            if (sap.ushell && sap.ushell.Container && sap.ushell.Container.getRenderer("fiori2")) {
+                sap.ushell.Container.getRenderer("fiori2").setHeaderVisibility(false, true);
+            }
             oRouter.getRoute("RoutesdInvoice").attachPatternMatched(oController._onRouteMatch, oController);
         },
         _onRouteMatch: function (oEvent) {
@@ -128,19 +131,13 @@ sap.ui.define([
             let oInvoiceNo = oSourceValue.getText();
             if (oInvoiceNo) {
                 var oSource = "/sap/opu/odata/SAP/ZBI_PRINT_PREVIEW_SRV/Print_previewSet('" + oInvoiceNo + "')/$value";
-                // this.getView().getModel("SDInvoiceModel").setProperty("/oInvoicePDF", oSource);
-                // if (!this.oPdfDialog) {
-                //     this.oPdfDialog = sap.ui.xmlfragment("com.sap.lh.mr.zlhsdinvoice.fragment.invoicePDF", this);
-                //     this.getView().addDependent(this.oPdfDialog);
-                // }
-                // this.oPdfDialog.open();
                 var oPdfViewer = new PDFViewer({
                     title: "Sundry Invoice",
                     height: "600px"
                 });
                 oPdfViewer.setSource(oSource);
-                oPdfViewer.open(); 
-                
+                oPdfViewer.open();
+
             }
         },
         onCloseDialogPDF: function () {
