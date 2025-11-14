@@ -136,7 +136,9 @@ sap.ui.define([
                     height: "600px"
                 });
                 oPdfViewer.setSource(oSource);
-                oPdfViewer.open();
+                var pdfUrl = oPdfViewer.getSource();
+                window.open(pdfUrl, "_blank");
+                //oPdfViewer.open();
 
             }
         },
