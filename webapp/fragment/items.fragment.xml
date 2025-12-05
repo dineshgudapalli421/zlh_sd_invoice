@@ -91,13 +91,13 @@
                             <m:Text textAlign="Center" text="{SDInvoiceModel>total}"/>
                         </template>
                     </Column>
-                    <!-- <Column
+                    <Column
                         width="11rem">
-                        <m:Label text="total_F" textAlign="Center" width="100%"/>
+                        <m:Label text="DRS Status" textAlign="Center" width="100%"/>
                         <template>
-                            <m:Text textAlign="Center" text="{SDInvoiceModel>total_F}"/>
+                            <m:Text textAlign="Center" text="{SDInvoiceModel>zz1_drs_status_bdh}"/>
                         </template>
-                    </Column>    -->
+                    </Column>   
                 </columns>
         </Table> 
         </smarttable:SmartTable>

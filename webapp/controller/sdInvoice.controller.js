@@ -127,8 +127,16 @@ sap.ui.define([
         },
         onPressInvoice: function (oEvent) {
             debugger;
+            var oTable = oController.getView().byId("tblSDInvoicePreview");
             let oSourceValue = oEvent.getSource();
+            let oIndex = oEvent.getSource().getParent().getIndex();
+            var rowContext = oTable.getContextByIndex(oIndex);
+            let DRsStatus = rowContext.getProperty('zz1_drs_status_bdh');
             let oInvoiceNo = oSourceValue.getText();
+            if(DRsStatus === ''){
+                return MessageBox.error("No preview available in DRS to show");
+            }
+            
             if (oInvoiceNo) {
                 var oSource = "/sap/opu/odata/SAP/ZBI_PRINT_PREVIEW_SRV/Print_previewSet('" + oInvoiceNo + "')/$value";
                 var oPdfViewer = new PDFViewer({
