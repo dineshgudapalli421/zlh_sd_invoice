@@ -83,9 +83,13 @@ sap.ui.define([
             var oSDInvoiceModel = oController.getView().getModel("SDInvoiceModel");
             var aFilter = [];
             const contractAccount = this.getView().byId("idCA").getValue();
+            const oBusinessPartner = this.getView().byId("idBP").getValue();
             const fromDate = this.getView().byId("idDTP1").getValue();
             const toDate = this.getView().byId("idDTP2").getValue();
-
+            const oDRSStatus = this.getView().byId("idDRStatus").getValue();
+            if (oBusinessPartner !== "") {
+                aFilter.push(new Filter("kunag", FilterOperator.EQ, oBusinessPartner));
+            }
             if (contractAccount !== "") {
                 aFilter.push(new Filter("vkont", FilterOperator.EQ, contractAccount));
             }
@@ -93,6 +97,9 @@ sap.ui.define([
                 let billingfrom = this.getDateFormat(this.byId("idDTP1").getDateValue());
                 let billingTo = this.getDateFormat(this.byId("idDTP2").getDateValue());
                 aFilter.push(new Filter("fkdat", FilterOperator.BT, billingfrom, billingTo));
+            }
+            if (oDRSStatus !== "") {
+                aFilter.push(new Filter("zz1_drs_status_bdh", FilterOperator.EQ, oDRSStatus));
             }
             var oModel = oController.getOwnerComponent().getModel();
             var oBusyDialog = new sap.m.BusyDialog({
@@ -133,10 +140,10 @@ sap.ui.define([
             var rowContext = oTable.getContextByIndex(oIndex);
             let DRsStatus = rowContext.getProperty('zz1_drs_status_bdh');
             let oInvoiceNo = oSourceValue.getText();
-            if(DRsStatus === ''){
+            if (DRsStatus === '') {
                 return MessageBox.error("No preview available in DRS to show");
             }
-            
+
             if (oInvoiceNo) {
                 var oSource = "/sap/opu/odata/SAP/ZBI_PRINT_PREVIEW_SRV/Print_previewSet('" + oInvoiceNo + "')/$value";
                 var oPdfViewer = new PDFViewer({

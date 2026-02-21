@@ -27,7 +27,20 @@
                 class="sapUiSmallMarginBottom"
             >
               <fb:filterGroupItems>                                            
-                                
+                                <fb:FilterGroupItem name="BusinessPartner" 
+                                label="Bill to Party" 
+                                groupName="Group1" 
+                                visibleInFilterBar="true" mandatory="false">
+                                    <fb:control>
+                                        <Input
+                                         id="idBP" 
+                                         width="90%"  
+                                         showValueHelp="false"
+                                         value="{filters>/idBP}"
+                                        >
+                                        </Input>
+                                    </fb:control>
+                                </fb:FilterGroupItem>
                                 <fb:FilterGroupItem name="ContractAccount" 
                                 label="Contract Account" 
                                 groupName="Group1" 
@@ -63,7 +76,21 @@
                                                 id="idDTP2" width="100%"
                                                 placeholder="Enter Date" displayFormat="dd-MM-yyyy"/>      
 											</fb:control>
-										</fb:FilterGroupItem>                                                                                             
+										</fb:FilterGroupItem>  
+                                        <fb:FilterGroupItem name="DrsStatus" 
+                                                label="DRS Status" 
+                                                groupName="Group1" 
+                                                visibleInFilterBar="true" mandatory="false">
+                                                <fb:control>
+                                                    <Input
+                                                    id="idDRStatus" 
+                                                    width="90%"  
+                                                    showValueHelp="false"
+                                                    value="{filters>/idDRStatus}"
+                                                    >
+                                                    </Input>
+                                                </fb:control>
+                                        </fb:FilterGroupItem>                                                                                           
                             </fb:filterGroupItems>                        
             </fb:FilterBar>
         </f:content>        

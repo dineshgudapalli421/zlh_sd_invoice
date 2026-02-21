@@ -18,7 +18,7 @@
                 enableAutoBinding="true"
                 enableExport="false"
                 demandPopin="true"
-                requestAtLeastFields="vbeln,fkdat,kunag,name1,vkont,total"
+                requestAtLeastFields="vbeln,fkdat,kunag,name1,vkont,total,zz1_drs_status_bdh"
             >
             <Table id="tblSDInvoicePreview"
                 ariaLabelledBy="title"
