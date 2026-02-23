@@ -86,7 +86,7 @@ sap.ui.define([
             const oBusinessPartner = this.getView().byId("idBP").getValue();
             const fromDate = this.getView().byId("idDTP1").getValue();
             const toDate = this.getView().byId("idDTP2").getValue();
-            const oDRSStatus = this.getView().byId("idDRStatus").getValue();
+            //const oDRSStatus = this.getView().byId("idDRStatus").getValue();
             if (oBusinessPartner !== "") {
                 aFilter.push(new Filter("kunag", FilterOperator.EQ, oBusinessPartner));
             }
@@ -98,9 +98,9 @@ sap.ui.define([
                 let billingTo = this.getDateFormat(this.byId("idDTP2").getDateValue());
                 aFilter.push(new Filter("fkdat", FilterOperator.BT, billingfrom, billingTo));
             }
-            if (oDRSStatus !== "") {
-                aFilter.push(new Filter("zz1_drs_status_bdh", FilterOperator.EQ, oDRSStatus));
-            }
+            // if (oDRSStatus !== "") {
+            //     aFilter.push(new Filter("zz1_drs_status_bdh", FilterOperator.EQ, oDRSStatus));
+            // }
             var oModel = oController.getOwnerComponent().getModel();
             var oBusyDialog = new sap.m.BusyDialog({
                 title: "Loading Data",

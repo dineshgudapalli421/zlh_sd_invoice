@@ -77,7 +77,7 @@
                                                 placeholder="Enter Date" displayFormat="dd-MM-yyyy"/>      
 											</fb:control>
 										</fb:FilterGroupItem>  
-                                        <fb:FilterGroupItem name="DrsStatus" 
+                                        <!-- <fb:FilterGroupItem name="DrsStatus" 
                                                 label="DRS Status" 
                                                 groupName="Group1" 
                                                 visibleInFilterBar="true" mandatory="false">
@@ -90,7 +90,7 @@
                                                     >
                                                     </Input>
                                                 </fb:control>
-                                        </fb:FilterGroupItem>                                                                                           
+                                        </fb:FilterGroupItem>                                                                                            -->
                             </fb:filterGroupItems>                        
             </fb:FilterBar>
         </f:content>        
